@@ -1,13 +1,11 @@
-        .text
-        .global start
-start:
-        b       main
+        .data
 arr:
         .byte 10, 20, 30
 arr_end:
 
-        .align
-main:
+	.text
+	.global	start
+start:
         ldr     r0,     =arr
         ldr     r1,     =arr_end
         bl      sum
