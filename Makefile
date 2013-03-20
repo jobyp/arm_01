@@ -21,8 +21,8 @@ all: $(patsubst %.s,%.bin,$(wildcard *.s))
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
-	dd if=/dev/zero of=flash.bin bs=4096 count=4096
-	dd if=add.bin of=flash.bin bs=4096 conv=notrunc
+	dd if=/dev/zero of=flash.bin bs=4096 count=4096 &> /dev/null
+	dd if=$@ of=flash.bin bs=4096 conv=notrunc &> /dev/null
 	mv flash.bin $@
 
 %.elf: %.o
