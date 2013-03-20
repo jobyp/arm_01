@@ -1,14 +1,17 @@
-AS=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-as
-LD=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-ld
-CC=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-gcc
-OBJCOPY=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-objcopy
-
 ifeq ($(shell uname -p),i686)
-ASFLAGS=
-LDFLAGS= -Ttext=0x0
+	ASFLAGS=
+	LDFLAGS= -Ttext=0x0
+	AS=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-as
+	LD=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-ld
+	CC=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-gcc
+	OBJCOPY=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-objcopy
 else
-ASFLAGS= -gstabs
-LDFLAGS=
+	ASFLAGS= -gstabs
+	LDFLAGS=
+	AS=as
+	LD=ld
+	CC=gcc -Wall -fomit-frame-pointer -marm
+	OBJCOPY=objcopy
 endif
 
 .PHONY: all
