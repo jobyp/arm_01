@@ -1,10 +1,11 @@
 ifeq ($(shell uname -p),i686)
 	ASFLAGS=
 	LDFLAGS= -Ttext=0x0
-	AS=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-as
-	LD=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-ld
-	CC=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-gcc
-	OBJCOPY=/local/home/pcj/bin/arm-2012.09/bin/arm-none-eabi-objcopy
+	AS=arm-none-eabi-as
+	LD=arm-none-eabi-ld
+	CC=arm-none-eabi-gcc
+	OBJCOPY=arm-none-eabi-objcopy
+	TARGETS=$(patsubst %.s,%.bin,$(wildcard *.s))
 else
 	ASFLAGS= -gstabs
 	LDFLAGS=
@@ -12,10 +13,11 @@ else
 	LD=ld
 	CC=gcc -Wall -fomit-frame-pointer -marm
 	OBJCOPY=objcopy
+	TARGETS=$(patsubst %.s,%.elf,$(wildcard *.s))
 endif
 
 .PHONY: all
-all: $(patsubst %.s,%.bin,$(wildcard *.s))
+all: $(TARGETS)
 
 .PRECIOUS: %.elf %.o
 
