@@ -24,10 +24,10 @@ all: $(TARGETS)
 .PRECIOUS: %.elf %.o
 
 main.elf: main.o sum-sub.o main.lds
-	$(LD) -e start -T main.lds -o $@ $^
+	$(LD) -e start -T main.lds -o $@ $(filter %.o,$^)
 
 add-mem.elf: add-mem.o add-mem.lds
-	$(LD) -e start -T add-mem.lds -o $@ $^
+	$(LD) -e start -T add-mem.lds -o $@ $(filter %.o,$^)
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
