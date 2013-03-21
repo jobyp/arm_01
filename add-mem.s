@@ -3,6 +3,16 @@ val1:	.4byte	10
 val2:	.4byte 	30
 result:	.4byte	0
 
+	.section "vectors"
+reset:	b	start   /* Reset */
+undef:	b	undef   /* Undefined exception */
+swi:	b	swi     /* Software Interrupt */
+pabt:	b	pabt    /* Prefetch abort */
+dabt:	b	dabt    /* Data abort */
+	nop		/* Reserved, not used */
+irq:	b	irq	/* IRQ */
+fiq:	b	fiq	/* FIQ */
+	
 	.text
 	.global start
 start:
